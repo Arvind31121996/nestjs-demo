@@ -1,0 +1,54 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "logs/errors/.2290ca7be64f54a75da428c953d9a4cfada69b4c-audit.json",
+    "files": [
+        {
+            "date": 1641537070550,
+            "name": "logs/errors/NestDemo-2022-01-07.log",
+            "hash": "04b5e8abb9769d01781dd38207c9f87f"
+        },
+        {
+            "date": 1641895401424,
+            "name": "logs/errors/NestDemo-2022-01-11.log",
+            "hash": "eabe29d0ec0e8592192306f07d886a93"
+        },
+        {
+            "date": 1641961249305,
+            "name": "logs/errors/NestDemo-2022-01-12.log",
+            "hash": "67f1223485e26a92394e33e6eaf465a4"
+        },
+        {
+            "date": 1642047834246,
+            "name": "logs/errors/NestDemo-2022-01-13.log",
+            "hash": "3c4529416b3bc92a584b322c09b84901"
+        },
+        {
+            "date": 1642394877321,
+            "name": "logs/errors/NestDemo-2022-01-17.log",
+            "hash": "d6953c11bfe1b090eea87f02573458f9"
+        },
+        {
+            "date": 1642481243369,
+            "name": "logs/errors/NestDemo-2022-01-18.log",
+            "hash": "3fdb9cf47d98531056901c63277dd372"
+        },
+        {
+            "date": 1642566679696,
+            "name": "logs/errors/NestDemo-2022-01-19.log",
+            "hash": "f4004e437fa145cc7b12f5bea355a7e7"
+        },
+        {
+            "date": 1642651901934,
+            "name": "logs/errors/NestDemo-2022-01-20.log",
+            "hash": "5ba6d80e2963f74bad674c9a2f62b45e"
+        },
+        {
+            "date": 1642739875542,
+            "name": "logs/errors/NestDemo-2022-01-21.log",
+            "hash": "5ae411c8e88e96e12dada5e44060bcf6"
+        }
+    ]
+}

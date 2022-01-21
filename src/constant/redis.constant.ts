@@ -1,0 +1,1 @@
+export const All_User_Store = 'all-user-store-r1'
