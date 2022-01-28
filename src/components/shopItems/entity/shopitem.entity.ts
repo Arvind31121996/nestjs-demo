@@ -6,8 +6,8 @@ import {
     UpdateDateColumn,
     ObjectID,
   } from "typeorm";
-  import { User } from "@components/user/entity/user.entity";
   import { Shop } from "@components/shops/entity/shop.entity"
+  import { User } from "@components/user/entity/user.entity";
   
   @Entity({ name: "shopItems" })
   export class ShopItems {

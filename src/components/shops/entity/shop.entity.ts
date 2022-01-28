@@ -7,6 +7,7 @@ import {
     ObjectID,
   } from "typeorm";
   import { User } from "@components/user/entity/user.entity";
+  import { ShopItems } from "@components/shopItems/entity/shopitem.entity";
   
   @Entity({ name: "shop" })
   export class Shop {
@@ -19,11 +20,6 @@ import {
     name: string;
   
     @Column({
-      type:"string",
-    })
-    createdBy: string;
-  
-    @Column({
       type: "string",
     })
     address: string;
@@ -32,6 +28,11 @@ import {
       type: "string",
     })
     category: string;
+
+    @Column({
+      type: "string",
+    })
+    createdBy: string;
   
     @CreateDateColumn({
       type: "timestamp",

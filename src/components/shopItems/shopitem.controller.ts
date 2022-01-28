@@ -1,7 +1,7 @@
-import { Body, Controller, Put, Post, Param, Delete, Get, UseGuards, Session, } from '@nestjs/common';
+import { Body, Controller, Put, Post, Param, Delete, Get, UseGuards, Request} from '@nestjs/common';
 import { User } from '@components/user/entity/user.entity';
 import { CreateShopItemDto } from '@components/shopItems/dto/createShopitem.dto';
-import { ShopDto } from '@components/shops/dto/shop.dto';
+import { ShopItemsDto } from '@components/shopItems/dto/shopItem.dto';
 import { JwtAuthGuard } from "@components/auth/jwt-auth.guard";
 import { ShopItemService } from './shopitem.service';
 import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags, ApiOkResponse, ApiUnauthorizedResponse} from '@nestjs/swagger';
@@ -18,13 +18,14 @@ export class ShopItemController {
 
   @ApiOkResponse({ description: 'Create Shop Items' })
   @ApiResponse({status:201})
-  @ApiBody({ type:  CreateShopItemDto})
+  @ApiBody({ type: CreateShopItemDto})
   @ApiTags('shopItem')
   @ApiBearerAuth('JWT')
   @UseGuards(JwtAuthGuard, RoleGuard(Role.Owner))
   @Post()
-  public async createShop(@Body() shopItemDto: CreateShopItemDto): Promise<ShopItems> {
-    return this.shopItemService.createShopItem(shopItemDto);
+  public async createShop(@Request() req: any,
+  @Body() shopItemDto: CreateShopItemDto): Promise<ShopItems> {
+    return this.shopItemService.createShopItem(shopItemDto, req.user);
   }
 
   
@@ -47,8 +48,8 @@ export class ShopItemController {
   @ApiBearerAuth('JWT')
   public async updateShop(
     @Param('id') shopId: string,
-    @Body() shopDto: ShopDto){
-    return this.shopItemService.updateShop(shopId,shopDto);
+    @Body() shopItemsDto: ShopItemsDto){
+    return this.shopItemService.updateShop(shopId,shopItemsDto);
   }
 
 

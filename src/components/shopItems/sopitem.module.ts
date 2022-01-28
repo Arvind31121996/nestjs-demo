@@ -5,6 +5,7 @@ import { ShopItemController } from '@components/shopItems/shopitem.controller';
 import { ShopItemService } from '@components/shopItems/shopitem.service';
 import { Shop } from '@components/shops/entity/shop.entity';
 import { RedisCacheModule } from '@components/redis/redis.module';
+import { User } from '@components/user/entity/user.entity';
 
 
 @Module({

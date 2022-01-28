@@ -12,23 +12,24 @@ import { LoggerLevel } from './constant';
 import { GoogleAuthModule } from '@components/googleauth/googleauth.module';
 import { RedisCacheModule } from "@components/redis/redis.module"
 import { ShopModule } from '@components/shops/shop.module'
-import { PassportModule } from '@nestjs/passport';
 import {ShopItemsModule} from '@components/shopItems/sopitem.module'
+import { configuration } from 'src/config/configuration';
+
+const ENV = process.env.NODE_ENV;
+
 
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
+    ConfigModule.forRoot({ 
+      envFilePath: `src/config/env/${process.env.NODE_ENV}.env`,
+      load: [configuration] 
+   }),
     TypeOrmModule.forRoot(ormConfig()),
     AuthModule,
     UserModule,
     ShopModule,
     ShopItemsModule,
-    // PassportModule.register({
-    //   session:true
-    // }),
     RedisCacheModule,
     CacheModule.register({
       ttl: 5,

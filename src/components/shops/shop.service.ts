@@ -5,8 +5,6 @@ import { Shop } from "./entity/shop.entity";
 import { CreateShopDto } from "@components/shops/dto/createShop.dto";
 import { Repository } from "typeorm";
 import { ObjectID } from "mongodb";
-import { EmailService } from "@components/utils/sendEmail";
-// import { RedisCacheService } from "@components/redis/redis.service";
 
 @Injectable()
 export class ShopService {
@@ -15,20 +13,17 @@ export class ShopService {
     private readonly userRepository: Repository<User>,
     @InjectRepository(Shop)
     private readonly shopRepository: Repository<Shop>,
-    // private readonly redisCacheService: RedisCacheService,
   ) {}
 
-  public async createShop(shopDto: CreateShopDto): Promise<Shop> {
-    const userDoc = await this.userRepository.findOne({ email: shopDto.createdBy });
+  public async createShop(shopDto: CreateShopDto, currentUser): Promise<Shop> {
     const shop = new Shop();
     shop.name = shopDto.name;
     shop.address = shopDto.address;
     shop.category = shopDto.category;
-    shop.createdBy = userDoc.email;
+    shop.createdBy = currentUser.email;
     try {
       const checkShop = await this.shopRepository.findOne({ name: shopDto.name });
       if(checkShop){
-        console.log('exist')
         throw new HttpException("Shop Already Exist with this Name", HttpStatus.CONFLICT);
       } else {
           return await this.shopRepository.save(shop);

@@ -1,4 +1,5 @@
-import { HttpException, Injectable, HttpStatus } from "@nestjs/common";
+import { HttpException, Injectable, HttpStatus,Inject,Scope } from "@nestjs/common";
+import { REQUEST } from '@nestjs/core';
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "../user/entity/user.entity";
 import { Role } from "../user/entity/role.entity";
@@ -15,8 +16,10 @@ import { CreatePermissionDto } from '@components/user/dto/create-permission.dto'
 import { Permission } from '@components/user/entity/permission.entity';
 import { RedisCacheService } from "@components/redis/redis.service";
 import { All_User_Store } from '@constant/redis.constant'
+import { Request } from 'express';
 
 @Injectable()
+@Injectable({ scope: Scope.REQUEST })
 export class UserService {
   constructor(
     @InjectRepository(User)
@@ -27,6 +30,7 @@ export class UserService {
     private readonly permissionRepository: Repository<Permission>,
     private readonly emailService: EmailService,
     private readonly redisCacheService: RedisCacheService,
+    // @Inject(REQUEST) private readonly request: Request
   ) {}
 
   public async create(userDto: CreateUserDto): Promise<User> {
@@ -90,6 +94,7 @@ export class UserService {
 
   public async getUsers(query) {
     try {
+      // console.log('Hello...........',this.request)
       let take = query.limit ? parseInt(query.limit) : 5;
       let skip = query.page ? (query.page * 5) : 0;
       let key = `all_user_store_limit:${take}_skip:${skip}`;

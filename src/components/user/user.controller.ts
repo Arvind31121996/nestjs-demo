@@ -10,6 +10,7 @@ import { UserService } from './user.service';
 import { CreatePermissionDto } from '@components/user/dto/create-permission.dto'
 import { Permission } from '@components/user/entity/permission.entity';
 import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags, ApiOkResponse, ApiUnauthorizedResponse} from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 
 @Controller('users')
@@ -65,10 +66,12 @@ export class UserController {
 
 
   @UseGuards(JwtAuthGuard)
+  // @AuthGuard('jwt')
   @Get()
   @ApiTags('users')
   @ApiBearerAuth('JWT')
   public async getUsers(
+    @Request() req: any,
     @Query() query: Record<string, any>
   ): Promise<User> {
     return this.userService.getUsers(query);

@@ -5,6 +5,7 @@ import { APIPrefix } from '@constant/common';
 import { ValidationFilter } from '@components/utils/http-exception.filter'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as fs from 'fs';
+import config from '@components/utils/config'
 
 
 async function bootstrap() {

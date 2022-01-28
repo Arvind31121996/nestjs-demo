@@ -6,21 +6,6 @@
     "auditLog": "logs/all/.62828470890d1dde72bd1f8301aefcf057f3bb59-audit.json",
     "files": [
         {
-            "date": 1641537070546,
-            "name": "logs/all/NestDemo-2022-01-07.log",
-            "hash": "cf11ca2414594799bb356b4ae28a36be"
-        },
-        {
-            "date": 1641895401418,
-            "name": "logs/all/NestDemo-2022-01-11.log",
-            "hash": "481e614685cb568927d24408738faa6a"
-        },
-        {
-            "date": 1641961249300,
-            "name": "logs/all/NestDemo-2022-01-12.log",
-            "hash": "23c1dce3fb8c3456f6a511214aec8a71"
-        },
-        {
             "date": 1642047834239,
             "name": "logs/all/NestDemo-2022-01-13.log",
             "hash": "4e43bec08ed212cecdf9ef416633f867"
@@ -49,6 +34,26 @@
             "date": 1642739875539,
             "name": "logs/all/NestDemo-2022-01-21.log",
             "hash": "c277e7bf54138d2f67aafeed5de18461"
+        },
+        {
+            "date": 1642999986069,
+            "name": "logs/all/NestDemo-2022-01-24.log",
+            "hash": "6b6a44c88197bf64293b57888ca987fb"
+        },
+        {
+            "date": 1643049126601,
+            "name": "logs/all/NestDemo-2022-01-25.log",
+            "hash": "fa6bca24b15f114de40c2cfeba33481e"
+        },
+        {
+            "date": 1643208750973,
+            "name": "logs/all/NestDemo-2022-01-26.log",
+            "hash": "db6362e07d678bb2ecc52bbe2b3688e9"
+        },
+        {
+            "date": 1643256946292,
+            "name": "logs/all/NestDemo-2022-01-27.log",
+            "hash": "9b70b556a96af29f21a7578e2b78d0cf"
         }
     ]
 }

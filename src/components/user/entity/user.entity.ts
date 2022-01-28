@@ -4,8 +4,7 @@ import {
   Entity,
   ObjectIdColumn,
   CreateDateColumn,
-  UpdateDateColumn,
-  ObjectID
+  UpdateDateColumn
 } from "typeorm";
 import { hashSync, genSaltSync } from "bcrypt";
 import { Role } from "./role.entity";
@@ -57,39 +56,39 @@ export class User {
   }
 }
 
-@Entity({ name: "returnUsers" })
-export class ReturnUser {
-  @ObjectIdColumn()
-  _id: string;
+// @Entity({ name: "returnUsers" })
+// export class ReturnUser {
+//   @ObjectIdColumn()
+//   _id: string;
 
-  @Column({
-    type: "string",
-  })
-  email: string;
+//   @Column({
+//     type: "string",
+//   })
+//   email: string;
 
-  @Column((type) => Role)
-  role: Role;
+//   @Column((type) => Role)
+//   role: Role;
 
-  @Column({
-    type: "enum",
-  })
-  isVerified: string;
+//   @Column({
+//     type: "enum",
+//   })
+//   isVerified: string;
 
-  @Column({
-    type: 'number'
-  })
-  age: number
+//   @Column({
+//     type: 'number'
+//   })
+//   age: number
 
-  @CreateDateColumn({
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP(6)",
-  })
-  created_at: Date;
+//   @CreateDateColumn({
+//     type: "timestamp",
+//     default: () => "CURRENT_TIMESTAMP(6)",
+//   })
+//   created_at: Date;
 
-  @UpdateDateColumn({
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP(6)",
-    onUpdate: "CURRENT_TIMESTAMP(6)",
-  })
-  updated_at: Date;
-}
+//   @UpdateDateColumn({
+//     type: "timestamp",
+//     default: () => "CURRENT_TIMESTAMP(6)",
+//     onUpdate: "CURRENT_TIMESTAMP(6)",
+//   })
+//   updated_at: Date;
+// }

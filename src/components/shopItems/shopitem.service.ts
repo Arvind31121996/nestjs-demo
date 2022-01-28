@@ -6,7 +6,7 @@ import { CreateShopItemDto } from "@components/shopItems/dto/createShopitem.dto"
 import { Repository } from "typeorm";
 import { ObjectID } from "mongodb";
 import { RedisCacheService } from "@components/redis/redis.service";
-import { json } from "express";
+import { User } from "@components/user/entity/user.entity";
 
 
 @Injectable()
@@ -19,10 +19,12 @@ export class ShopItemService {
     private readonly redisCacheService: RedisCacheService,
   ) {}
 
-  public async createShopItem(shopItemDto: CreateShopItemDto): Promise<ShopItems> {
+  public async createShopItem(shopItemDto: CreateShopItemDto, currentUser): Promise<ShopItems> {
     const shopDoc = await this.shopRepository.findOne({_id: new ObjectID(shopItemDto.shopId.toString())});
     if(!shopDoc){
       throw new HttpException("Shop Does Not Exist with this Id", HttpStatus.NOT_FOUND);
+    } else if(shopDoc.createdBy !== currentUser.email){
+      throw new HttpException("You do not have permission for this action", HttpStatus.FORBIDDEN);
     } else {
     const shopitem = new ShopItems();
     shopitem.name = shopItemDto.name;
@@ -37,7 +39,6 @@ export class ShopItemService {
       } else {
         const shopItemsData = await this.shopItemsRepository.save(shopitem);
         this.redisCacheService.setData(shopItemsData._id, JSON.stringify(shopItemsData), 360000);
-
       }
     } catch (e) {
       console.log(e);
@@ -56,13 +57,14 @@ export class ShopItemService {
     }
   }
 
-  public async updateShop(id, shopData) {
+  public async updateShop(id, shopItemsData) {
     try {
-      this.redisCacheService.delete(id);
-      return this.shopRepository.update(
+      this.redisCacheService.setData(id, shopItemsData, 36000);
+      const updteShopData = await this.shopItemsRepository.update(
         { _id: new ObjectID(id.toString()) },
-        shopData
+        shopItemsData
       );
+      console.log('Data....',updteShopData)
     } catch (e) {
       console.log(e);
       return e;

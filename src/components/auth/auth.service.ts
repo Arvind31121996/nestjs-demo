@@ -3,7 +3,7 @@ import { LoginUserDto } from '../user/dto/auth-login.dto';
 import { LoginStatus } from './interfaces/login-status.interface';
 import { UserService } from '../user/user.service'
 import { JwtService } from '@nestjs/jwt'
-
+import config from '@components/utils/config'
 
 @Injectable()
 export class AuthService {
@@ -15,8 +15,10 @@ export class AuthService {
     async login(loginUserDto: LoginUserDto,session): Promise<LoginStatus> {
         // find user in db
         const user = await this.usersService.findByLogin(loginUserDto);
+        console.log(user)
         // generate and sign token
         let userPayload = {
+          _id:user._id,
           email:user.email,
           role:user.role
         }
@@ -31,7 +33,7 @@ export class AuthService {
       }
 
       private _createToken(users:any, session) {
-        const expiresIn = process.env.EXPIRESIN;
+        const expiresIn = process.env.EXPIRESIN
         const accessToken = this.jwtService.sign(users);
         session.token = accessToken;
         return {

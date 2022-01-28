@@ -8,10 +8,6 @@ export class CreateShopDto {
 
   @IsNotEmpty()
   @ApiProperty()
-  createdBy: string;
-
-  @IsNotEmpty()
-  @ApiProperty()
   address: string;
 
   @IsNotEmpty()

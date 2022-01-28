@@ -1,4 +1,4 @@
-import { Body, Controller, Put, Post, Param, Delete, Get, UseGuards, Session, } from '@nestjs/common';
+import { Body, Controller, Put, Post, Param, Delete, Get, UseGuards, Request, } from '@nestjs/common';
 import { User } from '@components/user/entity/user.entity';
 import { CreateShopDto } from '@components/shops/dto/createShop.dto';
 import { ShopDto } from '@components/shops/dto/shop.dto';
@@ -23,8 +23,8 @@ export class ShopController {
   @ApiBearerAuth('JWT')
   @UseGuards(JwtAuthGuard, RoleGuard(Role.Owner))
   @Post()
-  public async createShop(@Body() shopDto: CreateShopDto): Promise<Shop> {
-    return this.shopService.createShop(shopDto);
+  public async createShop(@Body() shopDto: CreateShopDto,@Request() req: any,): Promise<Shop> {
+    return this.shopService.createShop(shopDto,req.user);
   }
 
   @UseGuards(JwtAuthGuard)
